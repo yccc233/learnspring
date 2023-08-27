@@ -11,7 +11,9 @@ public class UserController {
 
     @PostMapping("/verifyUser")
     public String verifyUser(@RequestParam(value = "username") String username,
-            @RequestParam(value = "pwd") String pwd) {
+                             @RequestParam(value = "pwd") String pwd) {
         return "Ok!";
     }
+
+
 }

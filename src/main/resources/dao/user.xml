@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="learn.spring.learnspring.dao.UserDao">
+
+    <select id="selectById" resultType="learn.spring.learnspring.model.User">
+        select id,
+               username,
+               nickname,
+               phone_number as phoneNumber,
+               email,
+               password,
+               avatar_url   as avatarUrl,
+               description,
+               enabled,
+               permissions
+        from tbl_user
+        where id = #{id}
+    </select>
+
+    <insert id="insertUser">
+        insert into tbl_user (username,
+        nickname,
+        phone_number,
+        email,
+        password,
+        avatar_url,
+        description,
+        enabled,
+        permissions)
+        values (#{username},
+        #{nickname},
+        #{phoneNumber},
+        #{email},
+        #{password},
+        #{avatarUrl},
+        #{description},
+        #{enabled},
+        #{permissions})
+        <selectKey keyColumn="id" resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="updateById">
+        update tbl_user
+        set username=#{username},
+            nickname=#{nickname}
+        where id = #{id}
+    </update>
+
+
+    <delete id="deleteById">
+        delete from tbl_user where id=#{id}
+    </delete>
+</mapper>
