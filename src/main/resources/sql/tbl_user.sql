@@ -11,7 +11,7 @@
  Target Server Version : 80029 (8.0.29)
  File Encoding         : 65001
 
- Date: 26/08/2023 18:14:04
+ Date: 27/08/2023 23:27:00
 */
 
 SET NAMES utf8mb4;
@@ -33,13 +33,13 @@ CREATE TABLE `tbl_user` (
   `enabled` tinyint(1) DEFAULT '1' COMMENT '启用状态',
   `permissions` int DEFAULT NULL COMMENT '权限标识位',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `tbl_user` (`id`, `username`, `nickname`, `phone_number`, `email`, `password`, `avatar_url`, `description`, `enabled`, `permissions`) VALUES (1, 'user1', 'Alice', '1234567890', 'alice@example.com', 'hashed_password_1', 'https://example.com/avatar1.jpg', 'Hello, I am Alice.', 1, 1);
+INSERT INTO `tbl_user` (`id`, `username`, `nickname`, `phone_number`, `email`, `password`, `avatar_url`, `description`, `enabled`, `permissions`) VALUES (1, 'ycc', 'Alice', '1234567890', 'alice@example.com', 'hashed_password_1', 'https://example.com/avatar1.jpg', 'Hello, I am Alice.', 1, 1);
 INSERT INTO `tbl_user` (`id`, `username`, `nickname`, `phone_number`, `email`, `password`, `avatar_url`, `description`, `enabled`, `permissions`) VALUES (2, 'user2', 'Bob', '9876543210', 'bob@example.com', 'hashed_password_2', 'https://example.com/avatar2.jpg', 'Hi, I am Bob.', 1, 2);
 INSERT INTO `tbl_user` (`id`, `username`, `nickname`, `phone_number`, `email`, `password`, `avatar_url`, `description`, `enabled`, `permissions`) VALUES (3, 'user3', 'Carol', '5551234567', 'carol@example.com', 'hashed_password_3', 'https://example.com/avatar3.jpg', 'Nice to meet you.', 1, 3);
 INSERT INTO `tbl_user` (`id`, `username`, `nickname`, `phone_number`, `email`, `password`, `avatar_url`, `description`, `enabled`, `permissions`) VALUES (4, 'user4', 'David', '1112223333', 'david@example.com', 'hashed_password_4', 'https://example.com/avatar4.jpg', 'Hello from David.', 0, 2);

@@ -50,6 +50,35 @@
 
 
     <delete id="deleteById">
-        delete from tbl_user where id=#{id}
+        delete
+        from tbl_user
+        where id = #{id}
     </delete>
+
+
+    <select id="usefulSelectByIdOrUsernameOrNickname" resultType="learn.spring.learnspring.model.User">
+        select
+        id,
+        username,
+        nickname,
+        phone_number as phoneNumber,
+        email,
+        password,
+        avatar_url as avatarUrl,
+        description,
+        enabled,
+        permissions
+        from tbl_user
+        <where>
+            <if test="id != null and id != ''">
+                and id=#{id}
+            </if>
+            <if test="userName != null and userName != ''">
+                and username like concat('%', #{userName}, '%')
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nickname like concat('%', #{nickName}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

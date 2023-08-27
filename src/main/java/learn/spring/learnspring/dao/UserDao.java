@@ -3,6 +3,8 @@ package learn.spring.learnspring.dao;
 import learn.spring.learnspring.model.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserDao {
 
@@ -14,4 +16,6 @@ public interface UserDao {
 
     int deleteById(int id);
 
+
+    List<User> usefulSelectByIdOrUsernameOrNickname(Integer id, String userName, String nickName);
 }
