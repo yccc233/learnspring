@@ -2,6 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="learn.spring.learnspring.dao.UserDao">
 
+    <resultMap id="BaseResultMap" type="learn.spring.learnspring.model.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="nickname" column="nickname"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="avatarUrl" column="avatar_url"/>
+        <result property="description" column="description"/>
+        <result property="enabled" column="enabled"/>
+        <result property="permissions" column="permissions"/>
+    </resultMap>
+
+    <resultMap id="userWithPermissionMap" type="learn.spring.learnspring.domain.UserExt" extends="BaseResultMap">
+        <association property="permission" resultMap="learn.spring.learnspring.dao.PermissionDao.BaseReaultMap" columnPrefix="per_"/>
+    </resultMap>
+
+
+    <select id="selectUserByIdMap" resultMap="userWithPermissionMap">
+        select us.id,
+               us.username,
+               us.nickname,
+               us.phone_number,
+               us.email,
+               us.password,
+               us.avatar_url,
+               us.description,
+               us.enabled,
+               us.permissions,
+               per.id              as per_id,
+               per.permission_type as per_permissionType,
+               per.desc            as per_desc
+        from tbl_user us
+                 left join tbl_permission per on us.permissions = per.id
+        where us.id = #{id}
+    </select>
+
+    <!-- 分割线-->
+
     <select id="selectById" resultType="learn.spring.learnspring.model.User">
         select id,
                username,
@@ -80,5 +119,24 @@
                 and nickname like concat('%', #{nickName}, '%')
             </if>
         </where>
+    </select>
+
+    <select id="selectUserById" resultType="learn.spring.learnspring.domain.UserExt">
+        select us.id,
+               us.username,
+               us.nickname,
+               us.phone_number     as phoneNumber,
+               us.email,
+               us.password,
+               us.avatar_url       as avatarUrl,
+               us.description,
+               us.enabled,
+               us.permissions,
+               per.id              as "permission.id",
+               per.permission_type as "permission.permissionType",
+               per.desc            as "permission.desc"
+        from tbl_user us
+                 left join tbl_permission per on us.permissions = per.id
+        where us.id = #{id}
     </select>
 </mapper>
